@@ -32,6 +32,7 @@ function updateHelpText(value) {
 topicEl.addEventListener('change', (e) => updateHelpText(e.target.value));
 updateHelpText(topicEl.value || '');
 
+// Submit form
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   statusEl.textContent = 'Sending...';
@@ -51,8 +52,7 @@ form.addEventListener('submit', async (e) => {
       form.reset();
       updateHelpText('');
     } else {
-      // Formspree returns JSON with error info on non-2xx
-      let msg = 'Oops—could not send. Please try again later, or email us directly.';
+      let msg = 'Could not send. Please try again later, or email us directly.';
       try {
         const data = await res.json();
         if (data && data.errors && data.errors.length) {
